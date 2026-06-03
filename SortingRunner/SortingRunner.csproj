@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <Platforms>x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Копіюватимемо DLL з C++ проекту після його збірки (в налаштуваннях SLN C++ має збиратися першим) -->
+    <!-- Щоб C# знайшов DLL, C++ проект налаштовано на вивід DLL у папку C# -->
+  </ItemGroup>
+
+</Project>

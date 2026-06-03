@@ -1,0 +1,59 @@
+## Visual Studio Cache/Options and user settings
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build outputs
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+ARM/
+ARM64/
+[Aa]rchive/
+[Pp]ublish/
+
+## C++ compilation outputs and intermediate files
+*.aps
+*.clw
+*.dep
+*.el
+*.exp
+*.ilk
+*.lib
+*.map
+*.mdp
+*.meta
+*.ncb
+*.ncl
+*.pch
+*.pdb
+*.plg
+*.res
+*.sbr
+*.scc
+*.tlb
+*.tlh
+*.tli
+*.trg
+*.vsp
+*.vspx
+*.wyg
+*.sdf
+*.opensdf
+*.ipch
+*.db
+*.opendb
+
+## IDEs (VS Code, JetBrains)
+.vscode/
+.idea/
+*.sln.iml
+
+## OS generated files
+.DS_Store
+Thumbs.db
