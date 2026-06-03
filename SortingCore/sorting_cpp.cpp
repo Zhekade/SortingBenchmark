@@ -17,6 +17,10 @@ void BubbleSortCpp(int* arr, int size, long long* comparisons, long long* swaps)
 
 void QuickSortCpp_Helper(int* arr, int low, int high, long long* comparisons, long long* swaps) {
     if (low < high) {
+        int mid = low + (high - low) / 2;
+        (*swaps)++;
+        std::swap(arr[mid], arr[high]);
+
         int pivot = arr[high];
         int i = (low - 1);
 

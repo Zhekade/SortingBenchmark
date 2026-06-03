@@ -33,6 +33,12 @@ namespace SortingRunner
         {
             if (low < high)
             {
+                int mid = low + (high - low) / 2;
+                swaps++;
+                int tempMid = arr[mid];
+                arr[mid] = arr[high];
+                arr[high] = tempMid;
+
                 int pivot = arr[high];
                 int i = (low - 1);
 

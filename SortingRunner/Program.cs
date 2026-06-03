@@ -46,13 +46,13 @@ namespace SortingRunner
                         if (!skipBubble)
                         {
                             RunBenchmark("C#", "BubbleSort", state, size, baseArr, testRuns, writer,
-                                (arr, out long comp, out long swap) => SortingAlgorithms.BubbleSortCSharp(arr, out comp, out swap));
+                                (int[] arr, out long comp, out long swap) => SortingAlgorithms.BubbleSortCSharp(arr, out comp, out swap));
 
                             RunBenchmark("C", "BubbleSort", state, size, baseArr, testRuns, writer,
-                                (arr, out long comp, out long swap) => SortingAlgorithms.BubbleSortC(arr, arr.Length, out comp, out swap));
+                                (int[] arr, out long comp, out long swap) => SortingAlgorithms.BubbleSortC(arr, arr.Length, out comp, out swap));
 
                             RunBenchmark("C++", "BubbleSort", state, size, baseArr, testRuns, writer,
-                                (arr, out long comp, out long swap) => SortingAlgorithms.BubbleSortCpp(arr, arr.Length, out comp, out swap));
+                                (int[] arr, out long comp, out long swap) => SortingAlgorithms.BubbleSortCpp(arr, arr.Length, out comp, out swap));
                         }
                         else
                         {
@@ -60,13 +60,13 @@ namespace SortingRunner
                         }
 
                         RunBenchmark("C#", "QuickSort", state, size, baseArr, testRuns, writer,
-                            (arr, out long comp, out long swap) => SortingAlgorithms.QuickSortCSharp(arr, out comp, out swap));
+                            (int[] arr, out long comp, out long swap) => SortingAlgorithms.QuickSortCSharp(arr, out comp, out swap));
 
                         RunBenchmark("C", "QuickSort", state, size, baseArr, testRuns, writer,
-                            (arr, out long comp, out long swap) => SortingAlgorithms.QuickSortC(arr, arr.Length, out comp, out swap));
+                            (int[] arr, out long comp, out long swap) => SortingAlgorithms.QuickSortC(arr, arr.Length, out comp, out swap));
 
                         RunBenchmark("C++", "QuickSort", state, size, baseArr, testRuns, writer,
-                            (arr, out long comp, out long swap) => SortingAlgorithms.QuickSortCpp(arr, arr.Length, out comp, out swap));
+                            (int[] arr, out long comp, out long swap) => SortingAlgorithms.QuickSortCpp(arr, arr.Length, out comp, out swap));
                     }
                 }
             }

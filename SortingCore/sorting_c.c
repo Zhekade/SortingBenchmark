@@ -18,6 +18,12 @@ void BubbleSortC(int* arr, int size, long long* comparisons, long long* swaps) {
 
 void QuickSortC_Helper(int* arr, int low, int high, long long* comparisons, long long* swaps) {
     if (low < high) {
+        int mid = low + (high - low) / 2;
+        (*swaps)++;
+        int tempMid = arr[mid];
+        arr[mid] = arr[high];
+        arr[high] = tempMid;
+
         int pivot = arr[high];
         int i = (low - 1);
 
