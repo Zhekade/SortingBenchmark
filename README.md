@@ -10,7 +10,7 @@
 ## 📌 Основна мета проєкту
 1. **Аналіз продуктивності**: Дослідження накладних витрат та швидкості виконання коду в .NET порівняно з нативним C/C++ кодом.
 2. **Дослідження P/Invoke**: Оцінка впливу маршалінгу даних та переходів між керованим та некерованим контекстами пам'яті на загальний час роботи програми.
-3. **Асимптотичний аналіз**: Порівняння алгоритмів різної складності: $O(N^2)$ (Bubble Sort) та $O(N \log N)$ (Quick Sort) на великих масивах даних.
+3. **Асимптотичний аналіз**: Порівняння алгоритмів різної складності: $O(N^2)$ (Bubble, Selection, Insertion Sort) та $O(N \log N)$ (Merge, Quick Sort) на великих масивах даних.
 
 ---
 
@@ -28,7 +28,7 @@
 
 * **[SortingCore](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingCore)** (C++/C DLL проект):
   * [SortingCore.h](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingCore/SortingCore.h) — заголовочний файл, що описує експортовані функції із директивою `__declspec(dllexport)`.
-  * [sorting_c.c](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingCore/sorting_c.c) — процедурна реалізація Bubble Sort та Quick Sort на мові C.
+  * [sorting_c.c](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingCore/sorting_c.c) — процедурна реалізація алгоритмів (Bubble, Selection, Insertion, Merge, Quick Sort) на мові C.
   * [sorting_cpp.cpp](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingCore/sorting_cpp.cpp) — реалізація алгоритмів на мові C++.
 * **[SortingRunner](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingRunner)** (C# .NET 8.0 Console Application):
   * [Program.cs](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingRunner/Program.cs) — точка входу, яка керує процесом бенчмарку, здійснює прогрів (warm-up) процесора та зберігає результати в CSV.
@@ -46,7 +46,7 @@
   * `Reversed` (елементи відсортовані у зворотному порядку).
 * **Кількість ітерацій**: Кожен тест запускається **10 разів**. Для фінальних результатів береться середнє значення часу (ms) для усунення випадкових коливань планувальника ОС.
 * **Метрики**: Час виконання (мс), кількість порівнянь елементів та кількість обмінів (swaps).
-* **Оптимізація**: Алгоритм Bubble Sort автоматично ігнорується для масивів розміром 1 000 000 елементів через квадратичну складність $O(N^2)$, щоб уникнути тривалого зависання програми.
+* **Оптимізація**: Алгоритми зі складністю $O(N^2)$ (Bubble Sort, Selection Sort, Insertion Sort) автоматично ігноруються для великих масивів розміром 100 000 та 1 000 000 елементів, щоб уникнути тривалого зависання програми.
 
 ---
 
