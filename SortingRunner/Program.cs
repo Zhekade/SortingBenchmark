@@ -39,11 +39,11 @@ namespace SortingRunner
                         int[] baseArr = baseArrays[stateIndex];
 
                         // Тут перелік всіх алгоритмів, які ми тестуємо. 
-                        // ВАЖЛИВО: для BubbleSort 1_000_000 елементів займе занадто багато часу (O(N^2)),
-                        // тому ми можемо обмежити його або чекати. Для цілей стенду, ми його пропустимо для мільйона.
-                        bool skipBubble = (size >= 1_000_000);
+                        // ВАЖЛИВО: для BubbleSort, SelectionSort та InsertionSort 100_000 елементів і більше займе занадто багато часу (O(N^2)),
+                        // тому ми можемо обмежити його або чекати. Для цілей стенду, ми його пропустимо для великих масивів.
+                        bool skipO2 = (size >= 100_000);
 
-                        if (!skipBubble)
+                        if (!skipO2)
                         {
                             RunBenchmark("C#", "BubbleSort", state, size, baseArr, testRuns, writer,
                                 (int[] arr, out long comp, out long swap) => SortingAlgorithms.BubbleSortCSharp(arr, out comp, out swap));
@@ -53,10 +53,28 @@ namespace SortingRunner
 
                             RunBenchmark("C++", "BubbleSort", state, size, baseArr, testRuns, writer,
                                 (int[] arr, out long comp, out long swap) => SortingAlgorithms.BubbleSortCpp(arr, arr.Length, out comp, out swap));
+
+                            RunBenchmark("C#", "SelectionSort", state, size, baseArr, testRuns, writer,
+                                (int[] arr, out long comp, out long swap) => SortingAlgorithms.SelectionSortCSharp(arr, out comp, out swap));
+
+                            RunBenchmark("C", "SelectionSort", state, size, baseArr, testRuns, writer,
+                                (int[] arr, out long comp, out long swap) => SortingAlgorithms.SelectionSortC(arr, arr.Length, out comp, out swap));
+
+                            RunBenchmark("C++", "SelectionSort", state, size, baseArr, testRuns, writer,
+                                (int[] arr, out long comp, out long swap) => SortingAlgorithms.SelectionSortCpp(arr, arr.Length, out comp, out swap));
+
+                            RunBenchmark("C#", "InsertionSort", state, size, baseArr, testRuns, writer,
+                                (int[] arr, out long comp, out long swap) => SortingAlgorithms.InsertionSortCSharp(arr, out comp, out swap));
+
+                            RunBenchmark("C", "InsertionSort", state, size, baseArr, testRuns, writer,
+                                (int[] arr, out long comp, out long swap) => SortingAlgorithms.InsertionSortC(arr, arr.Length, out comp, out swap));
+
+                            RunBenchmark("C++", "InsertionSort", state, size, baseArr, testRuns, writer,
+                                (int[] arr, out long comp, out long swap) => SortingAlgorithms.InsertionSortCpp(arr, arr.Length, out comp, out swap));
                         }
                         else
                         {
-                            Console.WriteLine($"[C#, C, C++] BubbleSort для розміру {size} ({state}) пропущено (занадто довго).");
+                            Console.WriteLine($"[C#, C, C++] BubbleSort, SelectionSort, InsertionSort для розміру {size} ({state}) пропущено (занадто довго).");
                         }
 
                         RunBenchmark("C#", "QuickSort", state, size, baseArr, testRuns, writer,
@@ -67,6 +85,15 @@ namespace SortingRunner
 
                         RunBenchmark("C++", "QuickSort", state, size, baseArr, testRuns, writer,
                             (int[] arr, out long comp, out long swap) => SortingAlgorithms.QuickSortCpp(arr, arr.Length, out comp, out swap));
+
+                        RunBenchmark("C#", "MergeSort", state, size, baseArr, testRuns, writer,
+                            (int[] arr, out long comp, out long swap) => SortingAlgorithms.MergeSortCSharp(arr, out comp, out swap));
+
+                        RunBenchmark("C", "MergeSort", state, size, baseArr, testRuns, writer,
+                            (int[] arr, out long comp, out long swap) => SortingAlgorithms.MergeSortC(arr, arr.Length, out comp, out swap));
+
+                        RunBenchmark("C++", "MergeSort", state, size, baseArr, testRuns, writer,
+                            (int[] arr, out long comp, out long swap) => SortingAlgorithms.MergeSortCpp(arr, arr.Length, out comp, out swap));
                     }
                 }
             }
@@ -128,14 +155,24 @@ namespace SortingRunner
 
             // Прогріваємо C#
             SortingAlgorithms.BubbleSortCSharp(ArrayGenerator.CopyArray(arr), out comp, out swap);
+            SortingAlgorithms.SelectionSortCSharp(ArrayGenerator.CopyArray(arr), out comp, out swap);
+            SortingAlgorithms.InsertionSortCSharp(ArrayGenerator.CopyArray(arr), out comp, out swap);
+            SortingAlgorithms.MergeSortCSharp(ArrayGenerator.CopyArray(arr), out comp, out swap);
             SortingAlgorithms.QuickSortCSharp(ArrayGenerator.CopyArray(arr), out comp, out swap);
 
             // Прогріваємо C та C++
             try
             {
                 SortingAlgorithms.BubbleSortC(ArrayGenerator.CopyArray(arr), warmUpSize, out comp, out swap);
+                SortingAlgorithms.SelectionSortC(ArrayGenerator.CopyArray(arr), warmUpSize, out comp, out swap);
+                SortingAlgorithms.InsertionSortC(ArrayGenerator.CopyArray(arr), warmUpSize, out comp, out swap);
+                SortingAlgorithms.MergeSortC(ArrayGenerator.CopyArray(arr), warmUpSize, out comp, out swap);
                 SortingAlgorithms.QuickSortC(ArrayGenerator.CopyArray(arr), warmUpSize, out comp, out swap);
+                
                 SortingAlgorithms.BubbleSortCpp(ArrayGenerator.CopyArray(arr), warmUpSize, out comp, out swap);
+                SortingAlgorithms.SelectionSortCpp(ArrayGenerator.CopyArray(arr), warmUpSize, out comp, out swap);
+                SortingAlgorithms.InsertionSortCpp(ArrayGenerator.CopyArray(arr), warmUpSize, out comp, out swap);
+                SortingAlgorithms.MergeSortCpp(ArrayGenerator.CopyArray(arr), warmUpSize, out comp, out swap);
                 SortingAlgorithms.QuickSortCpp(ArrayGenerator.CopyArray(arr), warmUpSize, out comp, out swap);
             }
             catch (DllNotFoundException)
