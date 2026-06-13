@@ -57,3 +57,4 @@ ARM64/
 ## OS generated files
 .DS_Store
 Thumbs.db
+results.csv

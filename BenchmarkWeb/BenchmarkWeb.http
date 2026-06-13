@@ -1,0 +1,6 @@
+@BenchmarkWeb_HostAddress = http://localhost:5082
+
+GET {{BenchmarkWeb_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

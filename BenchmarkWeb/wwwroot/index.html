@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Benchmark Visualizer</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sorting Benchmark <span>Visualizer</span></h1>
+            <p>Live performance tracking across languages and algorithms.</p>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="control-group">
+                    <h3>Languages</h3>
+                    <label><input type="checkbox" name="lang" value="C#" checked> C#</label>
+                    <label><input type="checkbox" name="lang" value="C" checked> C</label>
+                    <label><input type="checkbox" name="lang" value="C++" checked> C++</label>
+                </div>
+
+                <div class="control-group">
+                    <h3>Algorithms</h3>
+                    <label><input type="checkbox" name="algo" value="BubbleSort" checked> Bubble Sort</label>
+                    <label><input type="checkbox" name="algo" value="QuickSort" checked> Quick Sort</label>
+                </div>
+
+                <div class="control-group">
+                    <h3>States</h3>
+                    <label><input type="checkbox" name="state" value="Random" checked> Random</label>
+                    <label><input type="checkbox" name="state" value="Sorted"> Sorted</label>
+                    <label><input type="checkbox" name="state" value="Reversed"> Reversed</label>
+                </div>
+
+                <div class="control-group">
+                    <h3>Sizes</h3>
+                    <label><input type="checkbox" name="size" value="10000" checked> 10,000</label>
+                    <label><input type="checkbox" name="size" value="100000" checked> 100,000</label>
+                    <label><input type="checkbox" name="size" value="1000000" checked> 1,000,000</label>
+                </div>
+
+                <div class="actions">
+                    <button id="btnStart" class="btn-primary">Start Benchmark</button>
+                    <button id="btnStop" class="btn-danger" disabled>Stop</button>
+                </div>
+                <div id="statusText" class="status-text">Ready</div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="benchmarkChart"></canvas>
+            </div>
+        </div>
+
+        <div id="summaryContainer" class="summary-container" style="display: none;">
+            <h2>Підсумкова візуалізація</h2>
+            <div id="summaryContent"></div>
+        </div>
+    </div>
+    <script src="app.js?v=2"></script>
+</body>
+</html>
