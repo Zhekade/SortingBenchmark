@@ -82,11 +82,22 @@ namespace BenchmarkWeb.Services
                 try {
                     int[] warmUpArr = ArrayGenerator.GenerateRandom(1000);
                     SortingAlgorithms.BubbleSortCSharp(ArrayGenerator.CopyArray(warmUpArr), out _, out _);
+                    SortingAlgorithms.SelectionSortCSharp(ArrayGenerator.CopyArray(warmUpArr), out _, out _);
+                    SortingAlgorithms.InsertionSortCSharp(ArrayGenerator.CopyArray(warmUpArr), out _, out _);
                     SortingAlgorithms.QuickSortCSharp(ArrayGenerator.CopyArray(warmUpArr), out _, out _);
+                    SortingAlgorithms.MergeSortCSharp(ArrayGenerator.CopyArray(warmUpArr), out _, out _);
+
                     SortingAlgorithms.BubbleSortC(ArrayGenerator.CopyArray(warmUpArr), 1000, out _, out _);
+                    SortingAlgorithms.SelectionSortC(ArrayGenerator.CopyArray(warmUpArr), 1000, out _, out _);
+                    SortingAlgorithms.InsertionSortC(ArrayGenerator.CopyArray(warmUpArr), 1000, out _, out _);
                     SortingAlgorithms.QuickSortC(ArrayGenerator.CopyArray(warmUpArr), 1000, out _, out _);
+                    SortingAlgorithms.MergeSortC(ArrayGenerator.CopyArray(warmUpArr), 1000, out _, out _);
+
                     SortingAlgorithms.BubbleSortCpp(ArrayGenerator.CopyArray(warmUpArr), 1000, out _, out _);
+                    SortingAlgorithms.SelectionSortCpp(ArrayGenerator.CopyArray(warmUpArr), 1000, out _, out _);
+                    SortingAlgorithms.InsertionSortCpp(ArrayGenerator.CopyArray(warmUpArr), 1000, out _, out _);
                     SortingAlgorithms.QuickSortCpp(ArrayGenerator.CopyArray(warmUpArr), 1000, out _, out _);
+                    SortingAlgorithms.MergeSortCpp(ArrayGenerator.CopyArray(warmUpArr), 1000, out _, out _);
                 } catch { /* Ignore missing DLL during warmup */ }
 
                 foreach (var size in config.Sizes)
@@ -112,7 +123,7 @@ namespace BenchmarkWeb.Services
                         {
                             if (token.IsCancellationRequested) break;
                             
-                            bool isSlowAlgorithm = (algo == "BubbleSort");
+                            bool isSlowAlgorithm = (algo == "BubbleSort" || algo == "SelectionSort" || algo == "InsertionSort");
                             if (isSlowAlgorithm && size >= 100_000)
                             {
                                 foreach (var lang in config.Languages)
@@ -172,17 +183,26 @@ namespace BenchmarkWeb.Services
                     if (language == "C#")
                     {
                         if (algorithm == "BubbleSort") SortingAlgorithms.BubbleSortCSharp(testArr, out lastComparisons, out lastSwaps);
+                        else if (algorithm == "SelectionSort") SortingAlgorithms.SelectionSortCSharp(testArr, out lastComparisons, out lastSwaps);
+                        else if (algorithm == "InsertionSort") SortingAlgorithms.InsertionSortCSharp(testArr, out lastComparisons, out lastSwaps);
                         else if (algorithm == "QuickSort") SortingAlgorithms.QuickSortCSharp(testArr, out lastComparisons, out lastSwaps);
+                        else if (algorithm == "MergeSort") SortingAlgorithms.MergeSortCSharp(testArr, out lastComparisons, out lastSwaps);
                     }
                     else if (language == "C")
                     {
                         if (algorithm == "BubbleSort") SortingAlgorithms.BubbleSortC(testArr, size, out lastComparisons, out lastSwaps);
+                        else if (algorithm == "SelectionSort") SortingAlgorithms.SelectionSortC(testArr, size, out lastComparisons, out lastSwaps);
+                        else if (algorithm == "InsertionSort") SortingAlgorithms.InsertionSortC(testArr, size, out lastComparisons, out lastSwaps);
                         else if (algorithm == "QuickSort") SortingAlgorithms.QuickSortC(testArr, size, out lastComparisons, out lastSwaps);
+                        else if (algorithm == "MergeSort") SortingAlgorithms.MergeSortC(testArr, size, out lastComparisons, out lastSwaps);
                     }
                     else if (language == "C++")
                     {
                         if (algorithm == "BubbleSort") SortingAlgorithms.BubbleSortCpp(testArr, size, out lastComparisons, out lastSwaps);
+                        else if (algorithm == "SelectionSort") SortingAlgorithms.SelectionSortCpp(testArr, size, out lastComparisons, out lastSwaps);
+                        else if (algorithm == "InsertionSort") SortingAlgorithms.InsertionSortCpp(testArr, size, out lastComparisons, out lastSwaps);
                         else if (algorithm == "QuickSort") SortingAlgorithms.QuickSortCpp(testArr, size, out lastComparisons, out lastSwaps);
+                        else if (algorithm == "MergeSort") SortingAlgorithms.MergeSortCpp(testArr, size, out lastComparisons, out lastSwaps);
                     }
                 }
                 catch (DllNotFoundException)

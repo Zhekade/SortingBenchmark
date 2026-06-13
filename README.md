@@ -15,7 +15,8 @@
 ---
 
 ## 🛠️ Стек технологій
-* **C# / .NET 8.0**: Консольний додаток бенчмарку, генерація масивів, логування результатів, виклик нативних функцій.
+* **C# / .NET 10.0**: Консольний додаток бенчмарку, генерація масивів, логування результатів, виклик нативних функцій.
+* **ASP.NET Core**: Веб-додаток для інтерактивної візуалізації процесу та результатів сортування у браузері.
 * **C**: Чиста процедурна реалізація алгоритмів, скомпільована в нативну DLL.
 * **C++**: Реалізація алгоритмів із використанням компілятора MSVC, скомпільована в нативну DLL.
 * **P/Invoke (`DllImport`)**: Інструмент для виклику функцій з `SortingCore.dll` у C#.
@@ -30,10 +31,14 @@
   * [SortingCore.h](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingCore/SortingCore.h) — заголовочний файл, що описує експортовані функції із директивою `__declspec(dllexport)`.
   * [sorting_c.c](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingCore/sorting_c.c) — процедурна реалізація алгоритмів (Bubble, Selection, Insertion, Merge, Quick Sort) на мові C.
   * [sorting_cpp.cpp](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingCore/sorting_cpp.cpp) — реалізація алгоритмів на мові C++.
-* **[SortingRunner](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingRunner)** (C# .NET 8.0 Console Application):
-  * [Program.cs](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingRunner/Program.cs) — точка входу, яка керує процесом бенчмарку, здійснює прогрів (warm-up) процесора та зберігає результати в CSV.
+* **[SortingRunner](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingRunner)** (C# .NET 10.0 Console Application):
+  * [Program.cs](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingRunner/Program.cs) — точка входу, яка керує процесом бенчмарку, здійснює прогрів (warm-up) процесора, виводить гарну консольну статистику швидкості з відсотками та зберігає результати в CSV.
   * [SortingAlgorithms.cs](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingRunner/SortingAlgorithms.cs) — містить C# реалізації алгоритмів та декларації `[DllImport]` для зв'язку з DLL.
   * [ArrayGenerator.cs](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/SortingRunner/ArrayGenerator.cs) — допоміжний клас для генерації масивів різного стану.
+* **[BenchmarkWeb](file:///C:/Users/NoteRivne/.gemini/antigravity/scratch/SortingBenchmark/BenchmarkWeb)** (C# ASP.NET Core Web API + HTML/JS):
+  * Інтерактивна веб-панель для управління бенчмарками. 
+  * Забезпечує live-візуалізацію (графіки) поточних результатів через Server-Sent Events (SSE).
+  * Вміє будувати підсумкові звіти швидкодії після завершення прогонів на спільному графіку з відсотковим порівнянням результатів.
 
 ---
 
@@ -59,8 +64,14 @@
    * *Примітка: Проєкт `SortingCore` налаштований так, що після компіляції файл `SortingCore.dll` автоматично копіюється безпосередньо в робочу папку запуску консольного застосунку C# (`SortingRunner/bin/{Configuration}/net8.0/`).*
 4. Запустіть проєкт `SortingRunner` без налагодження (`Ctrl + F5`).
 
-### 2. Результати бенчмарку
-Після успішного виконання тестування:
-1. Детальна статистика часу виконання та операцій буде виведена на екран консолі.
+### 2. Запуск веб-версії (BenchmarkWeb)
+1. Відкрийте термінал у папці `BenchmarkWeb`.
+2. Виконайте команду `dotnet run`.
+3. Перейдіть у браузері за адресою, яку видасть консоль (наприклад, `http://localhost:5xxx`).
+4. На веб-сторінці ви можете обирати алгоритми, мови та розміри, а також бачити live-графік та детальну візуалізацію у відсотках після завершення тесту!
+
+### 3. Результати бенчмарку
+Після успішного виконання тестування (в консольній версії):
+1. Детальна статистика часу виконання, операцій та графічне представлення з відсотками буде виведено на екран консолі.
 2. У папці з виконуваним файлом програми (або в корені проєкту під час розробки) з'явиться файл `results.csv`, який містить зведені дані про тестування. 
 3. Отриманий CSV-файл можна відкрити в Excel або іншому інструменті аналізу для побудови графіків та детального аналізу продуктивності.
